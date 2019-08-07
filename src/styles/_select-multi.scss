@@ -41,6 +41,9 @@
         &::after {
           transform: rotate(-45deg);
         }
+        &:focus {
+          outline: none;
+        }
       }
     }
     .list {

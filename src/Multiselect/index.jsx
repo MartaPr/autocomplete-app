@@ -37,14 +37,11 @@ class MultiSelect extends Component {
   };
 
   getSelected = val => {
-    const newCountries = [...this.state.countries];
-    newCountries.splice(val, 1);
     if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
       return;
     }
     this.setState({
       tags: [...this.state.tags, val],
-      countries: newCountries,
       value: ''
     });
   };
