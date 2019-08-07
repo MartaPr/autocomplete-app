@@ -1,8 +1,23 @@
 .select {
-  &__input {
-    width: 400px;
-    position: relative;
+  &__input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    &--input {
+      width: 400px;
+      position: relative;
+      height: 36px;
+      padding-left: 15px;
+      border-bottom: 1px solid #d6dee4;
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        color: #333;
+      }
+    }
   }
+
   &__list {
     display: block;
     position: absolute;
@@ -13,7 +28,8 @@
 
   &__list-container {
     width: 400px;
-    height: 500px;
+    max-height: 500px;
+    height: auto;
     overflow: scroll;
     &--item {
       padding-bottom: 10px;

@@ -1,12 +1,12 @@
 import React from 'react';
 
 const List = props => {
-  const items = props.countries.map(item => {
+  const items = props.countries.map((item, i) => {
     return (
       <div
-        onClick={props.getSelected}
+        onClick={() => props.getSelected(item.name)}
         className="select__list-container--item"
-        key={item.name}
+        key={i}
       >
         {item.name}
       </div>

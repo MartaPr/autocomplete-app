@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-import DataList from '../Autocomplete';
-import Multiselect from '../Multiselect/List';
+import SingleSelect from '../SingleSelect';
+import MultiSelect from '../Multiselect';
 
 const Header = () => {
   return (
@@ -20,8 +20,8 @@ const Header = () => {
         </div>
       </header>
       <div>
-        <Route exact path="/" component={DataList} />
-        <Route exact path="/multiselect" component={Multiselect} />
+        <Route exact path="/" component={SingleSelect} />
+        <Route exact path="/multiselect" component={MultiSelect} />
       </div>
     </BrowserRouter>
   );

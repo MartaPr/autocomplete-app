@@ -1,44 +1,59 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import List from './List';
+import List from '../Utils/List';
+import Input from '../Utils/Input';
+import API from '../Utils/API';
+import Selected from '../Multiselect/Selected';
 
-class Autocomplete extends Component {
+class MultiSelect extends Component {
   state = {
     countries: [],
     filteredItems: [],
+    tags: [],
     isOpen: false,
     value: ''
   };
 
-  componentDidMount() {
-    axios
-      .get('https://restcountries.eu/rest/v2/all')
-      .then(data => {
-        this.setState({
-          countries: data.data
-        });
-      })
-      .catch(err => {
-        console.log('error', err);
-      });
+  async componentDidMount() {
+    let countries = await API.get('/', {
+      params: {
+        results: 1
+      }
+    });
+    this.setState({
+      countries: countries.data
+    });
   }
 
   handleSearch = event => {
     let keyword = event.target.value;
-    console.log(keyword);
     let filteredItems = this.state.countries.filter(item => {
       let searchItem = item.name.toLowerCase();
       return searchItem.match(keyword.toLowerCase());
     });
     this.setState({
-      filteredItems
+      filteredItems,
+      value: keyword
     });
   };
 
-  getSelected = event => {
-    console.log('value', event.currentTarget.textContent);
+  getSelected = val => {
+    const newCountries = [...this.state.countries];
+    newCountries.splice(val, 1);
+    if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+      return;
+    }
     this.setState({
-      value: event.currentTarget.textContent
+      tags: [...this.state.tags, val],
+      countries: newCountries,
+      value: ''
+    });
+  };
+
+  removeTag = i => {
+    const newTags = [...this.state.tags];
+    newTags.splice(i, 1);
+    this.setState({
+      tags: newTags
     });
   };
 
@@ -56,35 +71,53 @@ class Autocomplete extends Component {
     });
   };
 
+  printValue = () => {
+    return this.state.value;
+  };
+
   render() {
-    let listFiltered = this.state.filteredItems;
-    let listWhole = this.state.countries;
+    let { filteredItems } = this.state;
+    let { countries } = this.state;
     return (
-      <section className="select">
-        <div className="container">
-          <input
-            className="select__input"
-            type="text"
-            onChange={this.handleSearch}
-            onBlur={this.onBlur}
-            onFocus={this.onFocus}
-            placeholder="select"
-            value={this.state.value}
-          />
-          <div
-            className={
-              this.state.isOpen ? 'select__list' : 'select__list--hidden'
-            }
-          >
-            <List
-              countries={listFiltered.length === 0 ? listWhole : listFiltered}
-              getSelected={this.getSelected}
-            />
+      <section className="select-multi">
+        <div className="container-flex">
+          <div className="select-multi__input-tag">
+            {this.state.tags.map((tag, i) => (
+              <div className="select-multi__input-tag--item" key={i}>
+                {tag}
+                <button
+                  className="remove-tag"
+                  onClick={() => this.removeTag(i)}
+                />
+              </div>
+            ))}
+            <div className="select-multi__input-wrapper">
+              <Input
+                className="select-multi__input-wrapper--input"
+                onChange={this.handleSearch}
+                onBlur={this.onBlur}
+                onFocus={this.onFocus}
+                placeholder="Select Multiple..."
+                value={this.state.value}
+              />
+
+              <div className={this.state.isOpen ? 'list' : 'hidden'}>
+                <List
+                  countries={
+                    filteredItems.length === 0 ? countries : filteredItems
+                  }
+                  getSelected={this.getSelected}
+                />
+              </div>
+            </div>
           </div>
+
+          <Selected tags={this.state.tags} />
         </div>
+        {/*               <Selected tags={this.state.tags} /> */}
       </section>
     );
   }
 }
 
-export default Autocomplete;
+export default MultiSelect;

@@ -4,15 +4,16 @@
   align-items: center;
     &__links {
       display: flex;
-      justify-content: space-between;
       width: 20%;
       &-item {
         text-transform: uppercase;
         color: #000;
-        width: calc(100%/2);
-        text-align: center;
         &:first-child {
+          padding-right: 20px;
           border-right: 1px solid #000;
+        }
+        &:last-child {
+          padding-left: 20px;
         }
       }
     }
