@@ -37,11 +37,14 @@ class MultiSelect extends Component {
   };
 
   getSelected = val => {
+    const newCountries = [...this.state.countries];
+    newCountries.splice(val, 1);
     if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
       return;
     }
     this.setState({
       tags: [...this.state.tags, val],
+      countries: newCountries,
       value: ''
     });
   };
@@ -77,7 +80,7 @@ class MultiSelect extends Component {
     let { countries } = this.state;
     return (
       <section className="select-multi">
-        <div className="container-flex">
+        <div className="container container-flex">
           <div className="select-multi__input-tag">
             {this.state.tags.map((tag, i) => (
               <div className="select-multi__input-tag--item" key={i}>
