@@ -5,7 +5,7 @@ const Selected = props => {
     <section className="selected">
       <div className="selected__selected-container">
         <h1 className="selected__header">Selected item:</h1>
-        <p className="item">{props.value}</p>
+        <p className="item">{props.selected}</p>
       </div>
     </section>
   );

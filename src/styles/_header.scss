@@ -2,19 +2,23 @@
   height: 90px;
   display: flex;
   align-items: center;
-    &__links {
-      display: flex;
-      width: 20%;
-      &-item {
-        text-transform: uppercase;
-        color: #000;
-        &:first-child {
-          padding-right: 20px;
-          border-right: 1px solid #000;
-        }
-        &:last-child {
-          padding-left: 20px;
-        }
+
+  &__links {
+    display: flex;
+    width: 20%;
+
+    &-item {
+      text-transform: uppercase;
+      color: #000;
+
+      &:first-child {
+        padding-right: 20px;
+        border-right: 1px solid #000;
+      }
+
+      &:last-child {
+        padding-left: 20px;
       }
     }
   }
+}
