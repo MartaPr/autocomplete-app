@@ -1,5 +1,6 @@
 import React from 'react';
 import List from '../Utils/List';
+import img from '../img/section.jpg';
 
 const Search = props => {
   const items = props.tags.map((tag, i) => {
@@ -11,8 +12,17 @@ const Search = props => {
     );
   });
   return (
-    <section className="select-multi">
+    <section
+      className="select-multi"
+      style={{ backgroundImage: `url(${img})` }}
+    >
       <div className="container container-flex">
+        <h2>Lorem ipsum</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a
+          tincidunt leo. Fusce iaculis nunc in dictum rhoncus. Pellentesque
+          convallis vulputate diam.
+        </p>
         <div className="select-multi__input-tag">
           {items}
           <div className="select-multi__input-wrapper">

@@ -19,7 +19,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div>
+      <div className="routes">
         <Route exact path="/" component={SingleSelect} />
         <Route exact path="/multiselect" component={MultiSelect} />
       </div>

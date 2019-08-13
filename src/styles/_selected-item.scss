@@ -1,12 +1,15 @@
 .selected {
-  &__selected-container {
-    &__header {
-      color: #333;
-    }
+  padding-top: 5%;
+  height: 320px;
+  background-color: #333;
+  color: #fff;
 
-    .item {
-      line-height: 32px;
-      padding-top: 5px;
-    }
+  @media (max-width: $sm) {
+    height: 200px;
+  }
+
+  .item {
+    line-height: 32px;
+    padding-top: 5px;
   }
 }

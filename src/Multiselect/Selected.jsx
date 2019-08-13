@@ -6,8 +6,10 @@ const Selected = props => {
   });
   return (
     <section className="selected">
-      <h1 className="selected__header">Selected items</h1>
-      <ul>{selectedItems}</ul>
+      <div className="container">
+        <h1 className="selected__header">Selected items:</h1>
+        <ul>{selectedItems}</ul>
+      </div>
     </section>
   );
 };
